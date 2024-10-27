@@ -1,0 +1,70 @@
+body {
+    font-family: sans-serif;
+    color: #333;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+.container {
+    max-width: 600px;  /* Keep the container width */
+    margin: 0 auto;
+    padding: 15px;
+}
+
+div {
+    margin-bottom: 20px;
+}
+
+.label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.input-group {
+    display: flex;
+    justify-content: flex-start;
+}
+
+input[type="text"],
+input[type="date"] {
+    width: 20%;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin: 4px;
+}
+
+select {
+    width: 50%;
+    height: 165px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    display: block;
+    margin: 20px auto;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+#graph {
+    height: calc(70vh);
+    width: 80%;
+    margin: 0 auto;
+}

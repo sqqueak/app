@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sensor Data Visualization</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Sensor Data Visualization</h1>
+        
+        <div>
+            <label>Device Name:</label>
+            <input type="text" id="device-name" value="">
+        </div>
+        
+        <div>
+            <label>Select Time Range:</label>
+            <div class="input-group">
+                <input type="date" id="start-date" value="{{ min_time }}">
+                <input type="date" id="end-date" value="{{ max_time }}">
+            </div>
+            <br>
+            <label>Or enter time range (e.g., '1W', '1H'):</label>
+            <input type="text" id="time-range" value="">
+        </div>
+        
+        <div>
+            <label>Select Data Fields:</label>
+            <select id="data-fields" multiple>
+                {% for col in columns %}
+                    <option value="{{ col }}">{{ col }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        
+        <button id="submit-button">Plot</button>
+    
+    </div>
+    <div id="graph"></div>
+    
+    <script>
+        document.getElementById('submit-button').addEventListener('click', function() {
+            const deviceName = document.getElementById('device-name').value;
+            const dataFields = Array.from(document.getElementById('data-fields').selectedOptions).map(option => option.value);
+            const startDate = document.getElementById('start-date').value;
+            const endDate = document.getElementById('end-date').value;
+            const timeRange = document.getElementById('time-range').value;
+
+            fetch('/plot', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    device_name: deviceName,
+                    data_fields: dataFields,
+                    time_range: timeRange || [startDate, endDate]
+                }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                const graphDiv = document.getElementById('graph');
+                graphDiv.innerHTML = '';  // Clear previous graph
+                Plotly.newPlot(graphDiv, JSON.parse(data.fig));
+            });
+        });
+    </script>
+</body>
+</html>
