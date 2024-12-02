@@ -9,13 +9,18 @@ h1 {
 }
 
 .container {
-    max-width: 600px;  /* Keep the container width */
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 20px;
+    max-width: 1400px;
     margin: 0 auto;
-    padding: 15px;
+    padding: 10px;
 }
 
-div {
-    margin-bottom: 20px;
+.form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .label {
@@ -26,20 +31,20 @@ div {
 
 .input-group {
     display: flex;
-    justify-content: flex-start;
+    gap: 10px;
 }
 
 input[type="text"],
 input[type="date"] {
-    width: 20%;
-    padding: 8px;
+    width: 180px;
+    padding: 6px;
     border-radius: 5px;
     border: 1px solid #ccc;
-    margin: 4px;
+    font-size: 14px;
 }
 
 select {
-    width: 50%;
+    width: 100%;
     height: 165px;
     padding: 10px;
     border-radius: 5px;
@@ -64,7 +69,13 @@ button:hover {
 }
 
 #graph {
-    height: calc(70vh);
-    width: 80%;
+    height: auto;
+    width: 100%;
     margin: 0 auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+div {
+    margin-bottom: 15px;
 }

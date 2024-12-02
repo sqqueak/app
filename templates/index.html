@@ -9,43 +9,51 @@
 </head>
 <body>
     <div class="container">
-        <h1>Sensor Data Visualization</h1>
-        
-        <div>
-            <label>Device Name:</label>
-            <input type="text" id="device-name" value="">
-        </div>
-        
-        <div>
-            <label>Select Time Range:</label>
-            <div class="input-group">
-                <input type="date" id="start-date" value="{{ min_time }}">
-                <input type="date" id="end-date" value="{{ max_time }}">
+        <!-- Left Column: Form data -->
+        <div class="form-container">
+            <h1>Sensor Data Visualization</h1>
+            
+            <!-- Device Name Input -->
+            <div>
+                <label for="device-name" class="label">Device Name:</label>
+                <input type="text" id="device-name" value="">
             </div>
-            <br>
-            <label>Or enter time range (e.g., '1W', '1H'):</label>
-            <input type="text" id="time-range" value="">
-        </div>
-        
-        <div>
-            <label>Select Data Fields:</label>
-            <select id="data-fields" multiple>
-                {% for col in columns %}
-                    <option value="{{ col }}">{{ col }}</option>
-                {% endfor %}
-            </select>
+            
+            <!-- Time Range Input -->
+            <div>
+                <label for="start-date" class="label">Select Time Range:</label>
+                <div class="input-group">
+                    <input type="date" id="start-date" value="{{ min_time }}">
+                    <input type="date" id="end-date" value="{{ max_time }}">
+                </div>
+                <br>
+                <label for="time-range" class="label">Or enter time range (e.g., '1W', '1H'):</label>
+                <input type="text" id="time-range" value="">
+            </div>
+            
+            <!-- Data Fields Selection -->
+            <div>
+                <label for="data-fields" class="label">Select Data Fields:</label>
+                <select id="data-fields" multiple>
+                    {% for col in columns %}
+                        <option value="{{ col }}">{{ col }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <!-- File Upload Component -->
+            <div>
+                <label for="file-upload" class="label">Upload File:</label>
+                <input type="file" id="file-upload" accept=".csv, .json">
+            </div>
+            
+            <!-- Submit Button -->
+            <button id="submit-button">Plot</button>
         </div>
 
-        <!-- File Upload Component -->
-        <div>
-            <label>Upload File:</label>
-            <input type="file" id="file-upload" accept=".csv, .json">
-        </div>
-        
-        <button id="submit-button">Plot</button>
-    
+        <!-- Right Column: Graph -->
+        <div id="graph"></div>
     </div>
-    <div id="graph"></div>
     
     <script>
         document.getElementById('submit-button').addEventListener('click', function() {
